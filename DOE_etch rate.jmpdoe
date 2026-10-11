@@ -1,0 +1,102 @@
+﻿DOE(
+	Easy DOE,
+	{usage( 1 ), Add Response( Maximize, "Etch Rate", ., ., 1 ),
+	Add Response( Maximize, "Selectivity", ., ., 1 ),
+	Add Factor( Continuous, 0.5, 1, "Pressure", 0, "mTorr" ),
+	Add Factor( Continuous, 0.625, 1, "RF Power", 0, "W" ),
+	Add Factor( Continuous, 0.5, 1, "CCl4 flow", 0, "sccm" ),
+	Add Factor( Continuous, 0.25, 1, "He Flow", 0, "sccm" ),
+	Add Factor( Continuous, 0.5, 1, "O2 flow", 0, "sccm" ),
+	Add Factor( Continuous, 0.5, 1, "Electrode gap", 0, "cm" ),
+	Set Random Seed( 1386980924 ), Add Term( {1, 0} ), Add Term( {1, 1} ),
+	Add Term( {2, 1} ), Add Term( {3, 1} ), Add Term( {4, 1} ), Add Term( {5, 1} ),
+	Add Term( {6, 1} ), Add Alias Term( {1, 1}, {2, 1} ),
+	Add Alias Term( {1, 1}, {3, 1} ), Add Alias Term( {1, 1}, {4, 1} ),
+	Add Alias Term( {1, 1}, {5, 1} ), Add Alias Term( {1, 1}, {6, 1} ),
+	Add Alias Term( {2, 1}, {3, 1} ), Add Alias Term( {2, 1}, {4, 1} ),
+	Add Alias Term( {2, 1}, {5, 1} ), Add Alias Term( {2, 1}, {6, 1} ),
+	Add Alias Term( {3, 1}, {4, 1} ), Add Alias Term( {3, 1}, {5, 1} ),
+	Add Alias Term( {3, 1}, {6, 1} ), Add Alias Term( {4, 1}, {5, 1} ),
+	Add Alias Term( {4, 1}, {6, 1} ), Add Alias Term( {5, 1}, {6, 1} ),
+	Set Sample Size( 8 ), Optimality Criterion( 0 ), Simulate Responses( 0 ),
+	Save X Matrix( 0 )},
+	Set Generators(
+		{usage( 1 ), define, model(
+			guidedradio( 0 ),
+			guidedoptions( 8, 17, 28, 34 ),
+			flexibleradio( 0 ),
+			flexibleoptions(
+				dsd( 0, 2, 4 ),
+				custom(
+					runchoice( 1, 7, 12, . ),
+					msamplesize( 8 ),
+					wholesubplot( ., 0 ),
+					misc( 0, 0 )
+				)
+			)
+		), Design(
+			mfactorsettings(
+				[0.5, 1, 0.5, 0.5, 1, 1, 0.5, 1, 0.625, 0.625, 1, 0.625, 1, 0.625, 1,
+				1, 1, 0.5, 0.5, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 0.25, 1, 0.25, 0.25,
+				0.25, 0.5, 1, 0.5, 1, 1, 0.5, 1, 0.5, 0.5, 0.5, 1, 1, 1, 1, 0.5, 0.5
+				]
+			),
+			mplots( [](0, 1) ),
+			dsdblockcol( [](0, 1) ),
+			mnruns( 8 ),
+			specificationstate(
+				DOE(
+					{usage( 1 ), Add Response( Maximize, "Etch Rate", ., ., 1 ),
+					Add Response( Maximize, "Selectivity", ., ., 1 ),
+					Add Factor( Continuous, 0.5, 1, "Pressure", 0, "mTorr" ),
+					Add Factor( Continuous, 0.625, 1, "RF Power", 0, "W" ),
+					Add Factor( Continuous, 0.5, 1, "CCl4 flow", 0, "sccm" ),
+					Add Factor( Continuous, 0.25, 1, "He Flow", 0, "sccm" ),
+					Add Factor( Continuous, 0.5, 1, "O2 flow", 0, "sccm" ),
+					Add Factor( Continuous, 0.5, 1, "Electrode gap", 0, "cm" ),
+					Set Random Seed( 1386980924 ), Add Term( {1, 0} ),
+					Add Term( {1, 1} ), Add Term( {2, 1} ), Add Term( {3, 1} ),
+					Add Term( {4, 1} ), Add Term( {5, 1} ), Add Term( {6, 1} ),
+					Add Alias Term( {1, 1}, {2, 1} ),
+					Add Alias Term( {1, 1}, {3, 1} ),
+					Add Alias Term( {1, 1}, {4, 1} ),
+					Add Alias Term( {1, 1}, {5, 1} ),
+					Add Alias Term( {1, 1}, {6, 1} ),
+					Add Alias Term( {2, 1}, {3, 1} ),
+					Add Alias Term( {2, 1}, {4, 1} ),
+					Add Alias Term( {2, 1}, {5, 1} ),
+					Add Alias Term( {2, 1}, {6, 1} ),
+					Add Alias Term( {3, 1}, {4, 1} ),
+					Add Alias Term( {3, 1}, {5, 1} ),
+					Add Alias Term( {3, 1}, {6, 1} ),
+					Add Alias Term( {4, 1}, {5, 1} ),
+					Add Alias Term( {4, 1}, {6, 1} ),
+					Add Alias Term( {5, 1}, {6, 1} ), Set Sample Size( 8 ),
+					Optimality Criterion( 0 ), Simulate Responses( 0 ),
+					Save X Matrix( 0 )}
+				)
+			),
+			dsdplan( 0 ),
+			externaldesign( 0 )
+		), dataentry(
+			response( [., ., ., ., ., ., ., ., ., ., ., ., ., ., ., .] ),
+			mcustommodel(
+				Fit Model(
+					Effects(
+						:Pressure, :RF Power, :CCl4 flow, :He Flow, :O2 flow,
+						:Electrode gap
+					),
+					Y( :Etch Rate, :Selectivity )
+				)
+			),
+			simulatepanel(
+				coeffs( [0 0 0 0 0 0 0, 0 0 0 0 0 0 0], 0 ),
+				options( 0, {0, 1}, {0, 0.5, 0.15, 0.35}, {0, 0.5, 0.5}, {1} ),
+				other( [1, 1], 0, [1, 1], [1, 1], [1, 1] )
+			)
+		), datastate( 1, 0 ), jmppro( 1 ), analyze(
+			guidedmodel( lineproperty( [](0, 1) ) ),
+			flexiblemodel( fitplan( {} ) )
+		), predict( {} ), tabindex( 2 )}
+	)
+)
